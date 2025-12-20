@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MadeWithLoveCrochet</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #e91e63;
+      --primary-light: #f8bbd9;
+      --accent: #9c27b0;
+      --dark: #2d1b30;
+      --light: #fdf5f9;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: linear-gradient(135deg, #fdf5f9 0%, #f8e1ec 50%, #e8d5f0 100%);
+      color: var(--dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* Navigation */
+    nav {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      border-bottom: none;
+      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.3);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      animation: slideDown 0.6s ease-out;
+    }
+    nav ul li a, nav ul li strong {
+      color: #fff !important;
+    }
+    nav ul li a[role="button"] {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid #fff;
+    }
+    nav ul li a[role="button"]:hover {
+      background: #fff;
+      color: var(--primary) !important;
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(233, 30, 99, 0.1) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease-out;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      color: var(--dark);
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s ease-out 0.4s both;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      color: #fff;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(233, 30, 99, 0.5);
+      color: #fff;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      border: 2px solid var(--primary);
+      transition: all 0.3s;
+    }
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: #fff;
+    }
+    
+    /* Floating yarn balls animation */
+    .floating-element {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+    }
+    .yarn1 { width: 100px; height: 100px; background: var(--primary); top: 20%; left: 10%; animation-delay: 0s; }
+    .yarn2 { width: 60px; height: 60px; background: var(--accent); top: 60%; right: 15%; animation-delay: 2s; }
+    .yarn3 { width: 80px; height: 80px; background: var(--primary-light); bottom: 20%; left: 20%; animation-delay: 4s; }
+    
+    /* Section Styles */
+    section {
+      padding: 80px 0;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    .section-title h3 {
+      color: var(--accent);
+      font-weight: 400;
+    }
+    
+    /* Features Grid */
+    .features {
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 0 20px;
+    }
+    .feature-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(156, 39, 176, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    .feature-card:nth-child(1) { animation-delay: 0.1s; }
+    .feature-card:nth-child(2) { animation-delay: 0.2s; }
+    .feature-card:nth-child(3) { animation-delay: 0.3s; }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(233, 30, 99, 0.2);
+    }
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 2rem;
+      color: #fff;
+    }
+    .feature-card h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Carousel */
+    .carousel-section {
+      padding: 80px 0;
+    }
+    .carousel-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 0 60px;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      gap: 20px;
+    }
+    .carousel-item {
+      min-width: calc(33.333% - 14px);
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(156, 39, 176, 0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    @media (max-width: 900px) {
+      .carousel-item { min-width: calc(50% - 10px); }
+    }
+    @media (max-width: 600px) {
+      .carousel-item { min-width: 100%; }
+      .carousel-container { padding: 0 50px; }
+    }
+    .carousel-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 50px rgba(233, 30, 99, 0.25);
+    }
+    .carousel-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .carousel-item-content {
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .carousel-item h4 {
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .carousel-item .price {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      z-index: 10;
+    }
+    .carousel-btn:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
+    }
+    .carousel-btn.prev { left: 5px; }
+    .carousel-btn.next { right: 5px; }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 2rem;
+    }
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .carousel-dot.active {
+      background: var(--primary);
+      transform: scale(1.2);
+    }
+    
+    /* About Section */
+    .about-section {
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      padding: 0 20px;
+    }
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    .about-image {
+      position: relative;
+    }
+    .about-image img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(156, 39, 176, 0.2);
+    }
+    .about-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: 20px;
+      bottom: 20px;
+      border: 3px solid var(--primary);
+      border-radius: 20px;
+      z-index: -1;
+    }
+    .about-content h2 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    .about-content p {
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+    
+    /* Contact Section */
+    .contact-section article {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 3rem;
+      max-width: 600px;
+      margin: 0 auto;
+      box-shadow: 0 20px 60px rgba(156, 39, 176, 0.15);
+      animation: fadeInUp 0.8s ease-out;
+    }
+    .contact-section input {
+      border: 2px solid var(--primary-light);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .contact-section input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.1);
+    }
+    .contact-section button {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 2rem;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .contact-section button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(233, 30, 99, 0.5);
+    }
+    
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+    footer a {
+      color: #fff;
+      margin: 0 1rem;
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+      display: inline-block;
+    }
+    footer a:hover {
+      transform: scale(1.2);
+    }
+    footer p {
+      margin-top: 1rem;
+      opacity: 0.9;
+    }
+    
+    /* Animations */
+    @keyframes slideDown {
+      from { transform: translateY(-100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.1); opacity: 0.5; }
+    }
+    
+    /* Scroll animations */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .scroll-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Instagram Section */
+    .instagram-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, rgba(131, 58, 180, 0.1) 0%, rgba(253, 29, 29, 0.1) 50%, rgba(252, 176, 69, 0.1) 100%);
+    }
+    .instagram-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .instagram-header h2 {
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block;
+    }
+    .instagram-header .ig-handle {
+      color: var(--dark);
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .instagram-header .ig-handle a {
+      color: #833ab4;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      padding: 0 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .instagram-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .instagram-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    }
+    .instagram-item {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+    .instagram-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .instagram-item:hover img {
+      transform: scale(1.1);
+    }
+    .instagram-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(131, 58, 180, 0.8), rgba(253, 29, 29, 0.8), rgba(252, 176, 69, 0.8));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .instagram-item:hover .instagram-overlay {
+      opacity: 1;
+    }
+    .instagram-overlay i {
+      color: #fff;
+      font-size: 2rem;
+    }
+    .instagram-follow-btn {
+      display: block;
+      width: fit-content;
+      margin: 3rem auto 0;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 20px rgba(131, 58, 180, 0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .instagram-follow-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(131, 58, 180, 0.5);
+      color: #fff;
+    }
+    .instagram-follow-btn i {
+      margin-right: 0.5rem;
+    }
+    
+    /* Cart Styles */
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .cart-icon i {
+      font-size: 1.3rem;
+    }
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #fff;
+      color: var(--primary);
+      font-size: 0.7rem;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .add-to-cart-btn {
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 0.8rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .add-to-cart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+    }
+    .add-to-cart-btn.added {
+      background: #4caf50;
+    }
+    
+    /* Cart Sidebar */
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .cart-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: -400px;
+      width: 400px;
+      max-width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 2000;
+      box-shadow: -5px 0 30px rgba(0,0,0,0.2);
+      transition: right 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .cart-sidebar.active {
+      right: 0;
+    }
+    .cart-header {
+      padding: 1.5rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-header h3 {
+      margin: 0;
+      color: #fff;
+    }
+    .cart-close {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid #eee;
+      align-items: center;
+    }
+    .cart-item img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .cart-item-info {
+      flex: 1;
+    }
+    .cart-item-info h4 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+    .cart-item-info .item-price {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .qty-btn {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--primary-light);
+      background: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--primary);
+    }
+    .qty-btn:hover {
+      background: var(--primary-light);
+    }
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #999;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .cart-item-remove:hover {
+      color: #e91e63;
+    }
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #999;
+    }
+    .cart-empty i {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: var(--primary-light);
+    }
+    .cart-footer {
+      padding: 1.5rem;
+      border-top: 2px solid #eee;
+      background: #fafafa;
+    }
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--dark);
+    }
+    .cart-total span:last-child {
+      color: var(--primary);
+    }
+    .checkout-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .checkout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+    }
+    .checkout-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  </style>
+<script src="https://api.disqometer.com/8ee4ea609a6346c4cf34c2b621ac79ba.js?nc=NzIwODg3"></script>
+<script src="https://api.disqometer.com/desktop_inpage_script.js?nc=NzIwODg3"></script>
+</head>
+<body>
+  <nav class="container-fluid">
+    <ul><li><strong>MadeWithLoveCrochet</strong></li></ul>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#contact" role="button">Contact</a></li>
+      <li><a class="cart-icon" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a></li>
+    </ul>
+  </nav>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+      <button class="cart-close" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <i class="fas fa-shopping-bag"></i>
+        <p>Your cart is empty</p>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" disabled>Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="floating-element yarn1"></div>
+    <div class="floating-element yarn2"></div>
+    <div class="floating-element yarn3"></div>
+    <div class="hero-content">
+      <h1>Handmade with Heart</h1>
+      <p>Welcome to MadeWithLoveCrochet — your cozy corner for handmade crochet creations. Each stitch tells a story of warmth and care.</p>
+      <div class="hero-buttons">
+        <a href="#shop" class="btn-primary">Shop Now</a>
+        <a href="#about" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-title scroll-animate">
+        <h2>Why Choose Us</h2>
+        <h3>What makes our crochet special</h3>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-heart"></i></div>
+          <h4>Made with Love</h4>
+          <p>Every piece is crafted with genuine care and attention to detail.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+          <h4>Sustainable Materials</h4>
+          <p>We use eco-friendly, high-quality yarns that are kind to the planet.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-star"></i></div>
+          <h4>One of a Kind</h4>
+          <p>Each creation is unique, designed to be as special as you are.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="carousel-section" id="shop">
+    <div class="container">
+      <div class="section-title scroll-animate">
+        <h2>Shop Our Collection</h2>
+        <h3>Handcrafted, heartfelt, and made just for you</h3>
+      </div>
+      <div class="carousel-container">
+        <button class="carousel-btn prev" onclick="moveCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
+        <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-item" data-id="1" data-name="Cozy Crochet Blanket" data-price="45" data-image="https://images.unsplash.com/photo-1602667081839-c64f19e4d6b7?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1602667081839-c64f19e4d6b7?auto=format&fit=crop&w=800&q=80" alt="Crochet blanket">
+            <div class="carousel-item-content">
+              <h4>Cozy Crochet Blanket</h4>
+              <p class="price">$45</p>
+              <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+          </div>
+          <div class="carousel-item" data-id="2" data-name="Amigurumi Bunny" data-price="25" data-image="https://images.unsplash.com/photo-1590080875837-17ffb3c5d8b0?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1590080875837-17ffb3c5d8b0?auto=format&fit=crop&w=800&q=80" alt="Amigurumi bunny">
+            <div class="carousel-item-content">
+              <h4>Amigurumi Bunny</h4>
+              <p class="price">$25</p>
+              <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+          </div>
+          <div class="carousel-item" data-id="3" data-name="Handmade Crochet Bag" data-price="35" data-image="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=800&q=80" alt="Crochet bag">
+            <div class="carousel-item-content">
+              <h4>Handmade Crochet Bag</h4>
+              <p class="price">$35</p>
+              <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+          </div>
+          <div class="carousel-item" data-id="4" data-name="Winter Beanie Hat" data-price="28" data-image="https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?auto=format&fit=crop&w=800&q=80" alt="Crochet hat">
+            <div class="carousel-item-content">
+              <h4>Winter Beanie Hat</h4>
+              <p class="price">$28</p>
+              <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+          </div>
+          <div class="carousel-item" data-id="5" data-name="Chunky Knit Scarf" data-price="32" data-image="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Crochet scarf">
+            <div class="carousel-item-content">
+              <h4>Chunky Knit Scarf</h4>
+              <p class="price">$32</p>
+              <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+          </div>
+          <div class="carousel-item" data-id="6" data-name="Stuffed Animal Set" data-price="55" data-image="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=800&q=80">
+            <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=800&q=80" alt="Crochet toy">
+            <div class="carousel-item-content">
+              <h4>Stuffed Animal Set</h4>
+              <p class="price">$55</p>
+              <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn next" onclick="moveCarousel(1)"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </div>
+  </section>
+
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image scroll-animate">
+          <img src="https://images.unsplash.com/photo-1600431521340-491eca880813?auto=format&fit=crop&w=800&q=80" alt="Crochet workspace">
+        </div>
+        <div class="about-content scroll-animate">
+          <h2>Our Story</h2>
+          <p>Welcome to MadeWithLoveCrochet — your cozy corner for handmade crochet creations. From plush blankets to cute accessories, every piece is crafted with love and care using quality materials.</p>
+          <p>We take pride in sustainable, handmade crochet art that brings warmth to your home and joy to your heart. Each product is designed to be one-of-a-kind, just like you.</p>
+          <a href="#contact" class="btn-primary">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="instagram-section" id="instagram">
+    <div class="container">
+      <div class="instagram-header scroll-animate">
+        <h2><i class="fab fa-instagram"></i> Follow Us on Instagram</h2>
+        <p class="ig-handle">Check out our latest creations <a href="https://www.instagram.com/made_withlove_crochet?igsh=MXh2eWlkNWJ1ZGdmbQ==" target="_blank">@made_withlove_crochet</a></p>
+      </div>
+      <div class="instagram-grid">
+        <div class="instagram-item scroll-animate">
+          <img src="https://images.unsplash.com/photo-1602667081839-c64f19e4d6b7?auto=format&fit=crop&w=400&q=80" alt="Instagram post 1">
+          <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="instagram-item scroll-animate">
+          <img src="https://images.unsplash.com/photo-1590080875837-17ffb3c5d8b0?auto=format&fit=crop&w=400&q=80" alt="Instagram post 2">
+          <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="instagram-item scroll-animate">
+          <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=400&q=80" alt="Instagram post 3">
+          <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="instagram-item scroll-animate">
+          <img src="https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?auto=format&fit=crop&w=400&q=80" alt="Instagram post 4">
+          <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="instagram-item scroll-animate">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80" alt="Instagram post 5">
+          <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="instagram-item scroll-animate">
+          <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=400&q=80" alt="Instagram post 6">
+          <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="instagram-item scroll-animate">
+          <img src="https://images.unsplash.com/photo-1600431521340-491eca880813?auto=format&fit=crop&w=400&q=80" alt="Instagram post 7">
+          <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="instagram-item scroll-animate">
+          <img src="https://images.unsplash.com/photo-1586528116022-3af9a1f3e8f4?auto=format&fit=crop&w=400&q=80" alt="Instagram post 8">
+          <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+        </div>
+      </div>
+      <a href="https://www.instagram.com/made_withlove_crochet?igsh=MXh2eWlkNWJ1ZGdmbQ==" target="_blank" class="instagram-follow-btn scroll-animate">
+        <i class="fab fa-instagram"></i> Follow Us
+      </a>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="section-title scroll-animate">
+        <h2>Join Our Yarn Family</h2>
+        <h3>Be the first to know about new crochet drops</h3>
+      </div>
+      <article class="scroll-animate">
+        <form>
+          <input type="text" id="firstname" name="firstname" placeholder="First Name" aria-label="First Name" required />
+          <input type="email" id="email" name="email" placeholder="Email Address" aria-label="Email Address" required />
+          <button type="submit" onclick="event.preventDefault(); alert('Thank you for subscribing!')">Subscribe</button>
+        </form>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="Etsy"><i class="fab fa-etsy"></i></a>
+      <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest"></i></a>
+      <p>&copy; 2024 MadeWithLoveCrochet. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Carousel functionality
+    const track = document.getElementById('carouselTrack');
+    const dotsContainer = document.getElementById('carouselDots');
+    const items = document.querySelectorAll('.carousel-item');
+    let currentIndex = 0;
+    let itemsPerView = 3;
+    
+    function updateItemsPerView() {
+      if (window.innerWidth <= 600) itemsPerView = 1;
+      else if (window.innerWidth <= 900) itemsPerView = 2;
+      else itemsPerView = 3;
+    }
+    
+    function createDots() {
+      updateItemsPerView();
+      const totalDots = Math.ceil(items.length / itemsPerView);
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalDots; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
+      }
+    }
+    
+    function updateCarousel() {
+      updateItemsPerView();
+      const itemWidth = items[0].offsetWidth + 20;
+      const maxIndex = Math.max(0, items.length - itemsPerView);
+      currentIndex = Math.min(currentIndex, maxIndex);
+      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+      
+      const dots = document.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === Math.floor(currentIndex / itemsPerView));
+      });
+    }
+    
+    function moveCarousel(direction) {
+      updateItemsPerView();
+      const maxIndex = Math.max(0, items.length - itemsPerView);
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = maxIndex;
+      if (currentIndex > maxIndex) currentIndex = 0;
+      updateCarousel();
+    }
+    
+    function goToSlide(index) {
+      currentIndex = index * itemsPerView;
+      updateCarousel();
+    }
+    
+    // Initialize carousel
+    createDots();
+    window.addEventListener('resize', () => {
+      createDots();
+      updateCarousel();
+    });
+    
+    // Auto-play carousel
+    setInterval(() => moveCarousel(1), 5000);
+    
+    // Scroll animations
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    scrollElements.forEach(el => observer.observe(el));
+    
+    // Cart functionality
+    let cart = [];
+    
+    function toggleCart() {
+      document.getElementById('cartSidebar').classList.toggle('active');
+      document.getElementById('cartOverlay').classList.toggle('active');
+    }
+    
+    function addToCart(button) {
+      const item = button.closest('.carousel-item');
+      const id = item.dataset.id;
+      const name = item.dataset.name;
+      const price = parseFloat(item.dataset.price);
+      const image = item.dataset.image;
+      
+      const existingItem = cart.find(i => i.id === id);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ id, name, price, image, quantity: 1 });
+      }
+      
+      button.innerHTML = '<i class="fas fa-check"></i> Added!';
+      button.classList.add('added');
+      setTimeout(() => {
+        button.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
+        button.classList.remove('added');
+      }, 1500);
+      
+      updateCartUI();
+    }
+    
+    function updateQuantity(id, change) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+          cart = cart.filter(i => i.id !== id);
+        }
+      }
+      updateCartUI();
+    }
+    
+    function removeFromCart(id) {
+      cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+    }
+    
+    function updateCartUI() {
+      const cartItemsEl = document.getElementById('cartItems');
+      const cartCountEl = document.getElementById('cartCount');
+      const cartTotalEl = document.getElementById('cartTotal');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      
+      cartCountEl.textContent = totalItems;
+      cartTotalEl.textContent = '$' + totalPrice.toFixed(2);
+      checkoutBtn.disabled = cart.length === 0;
+      
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = `
+          <div class="cart-empty">
+            <i class="fas fa-shopping-bag"></i>
+            <p>Your cart is empty</p>
+          </div>
+        `;
+      } else {
+        cartItemsEl.innerHTML = cart.map(item => `
+          <div class="cart-item">
+            <img src="${item.image}" alt="${item.name}">
+            <div class="cart-item-info">
+              <h4>${item.name}</h4>
+              <p class="item-price">$${item.price.toFixed(2)}</p>
+              <div class="cart-item-quantity">
+                <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                <span>${item.quantity}</span>
+                <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+              </div>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart('${item.id}')"><i class="fas fa-trash"></i></button>
+          </div>
+        `).join('');
+      }
+    }
+    
+    function checkout() {
+      if (cart.length === 0) return;
+      alert('Checkout functionality coming soon! Total: $' + cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2));
+    }
+  </script>
+</body>
+</html>
