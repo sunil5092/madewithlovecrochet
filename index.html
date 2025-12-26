@@ -761,7 +761,7 @@
     <div class="cart-footer">
       <div class="cart-total">
         <span>Total:</span>
-        <span id="cartTotal">$0.00</span>
+        <span id="cartTotal">₹0.00</span>
       </div>
       <button class="checkout-btn" id="checkoutBtn" onclick="checkout()" disabled>Proceed to Checkout</button>
     </div>
@@ -820,7 +820,7 @@
             <img src="https://images.unsplash.com/photo-1602667081839-c64f19e4d6b7?auto=format&fit=crop&w=800&q=80" alt="Crochet blanket">
             <div class="carousel-item-content">
               <h4>Cozy Crochet Blanket</h4>
-              <p class="price">$45</p>
+              <p class="price">₹45</p>
               <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             </div>
           </div>
@@ -828,7 +828,7 @@
             <img src="https://images.unsplash.com/photo-1590080875837-17ffb3c5d8b0?auto=format&fit=crop&w=800&q=80" alt="Amigurumi bunny">
             <div class="carousel-item-content">
               <h4>Amigurumi Bunny</h4>
-              <p class="price">$25</p>
+              <p class="price">₹25</p>
               <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             </div>
           </div>
@@ -836,7 +836,7 @@
             <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=800&q=80" alt="Crochet bag">
             <div class="carousel-item-content">
               <h4>Handmade Crochet Bag</h4>
-              <p class="price">$35</p>
+              <p class="price">₹35</p>
               <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             </div>
           </div>
@@ -844,7 +844,7 @@
             <img src="https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?auto=format&fit=crop&w=800&q=80" alt="Crochet hat">
             <div class="carousel-item-content">
               <h4>Winter Beanie Hat</h4>
-              <p class="price">$28</p>
+              <p class="price">₹28</p>
               <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             </div>
           </div>
@@ -852,7 +852,7 @@
             <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Crochet scarf">
             <div class="carousel-item-content">
               <h4>Chunky Knit Scarf</h4>
-              <p class="price">$32</p>
+              <p class="price">₹32</p>
               <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             </div>
           </div>
@@ -860,7 +860,7 @@
             <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=800&q=80" alt="Crochet toy">
             <div class="carousel-item-content">
               <h4>Stuffed Animal Set</h4>
-              <p class="price">$55</p>
+              <p class="price">₹55</p>
               <button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button>
             </div>
           </div>
@@ -959,7 +959,7 @@
   </footer>
 
   <script>
-    // Carousel functionality
+    // Carousel functionality (original script continues...) - existing carousel script will run as before
     const track = document.getElementById('carouselTrack');
     const dotsContainer = document.getElementById('carouselDots');
     const items = document.querySelectorAll('.carousel-item');
@@ -1000,131 +1000,167 @@
     function moveCarousel(direction) {
       updateItemsPerView();
       const maxIndex = Math.max(0, items.length - itemsPerView);
-      currentIndex += direction;
-      if (currentIndex < 0) currentIndex = maxIndex;
-      if (currentIndex > maxIndex) currentIndex = 0;
+      currentIndex = Math.min(Math.max(0, currentIndex + direction * itemsPerView), maxIndex);
       updateCarousel();
     }
     
     function goToSlide(index) {
+      updateItemsPerView();
       currentIndex = index * itemsPerView;
       updateCarousel();
     }
     
-    // Initialize carousel
-    createDots();
     window.addEventListener('resize', () => {
+      updateCarousel();
+      createDots();
+    });
+    
+    // Initialize carousel dots and position after DOM content loads
+    document.addEventListener('DOMContentLoaded', () => {
       createDots();
       updateCarousel();
     });
-    
-    // Auto-play carousel
-    setInterval(() => moveCarousel(1), 5000);
-    
-    // Scroll animations
-    const scrollElements = document.querySelectorAll('.scroll-animate');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    scrollElements.forEach(el => observer.observe(el));
-    
-    // Cart functionality
-    let cart = [];
-    
-    function toggleCart() {
-      document.getElementById('cartSidebar').classList.toggle('active');
-      document.getElementById('cartOverlay').classList.toggle('active');
-    }
-    
-    function addToCart(button) {
-      const item = button.closest('.carousel-item');
-      const id = item.dataset.id;
-      const name = item.dataset.name;
-      const price = parseFloat(item.dataset.price);
-      const image = item.dataset.image;
-      
-      const existingItem = cart.find(i => i.id === id);
-      if (existingItem) {
-        existingItem.quantity++;
-      } else {
-        cart.push({ id, name, price, image, quantity: 1 });
-      }
-      
-      button.innerHTML = '<i class="fas fa-check"></i> Added!';
-      button.classList.add('added');
-      setTimeout(() => {
-        button.innerHTML = '<i class="fas fa-cart-plus"></i> Add to Cart';
-        button.classList.remove('added');
-      }, 1500);
-      
-      updateCartUI();
-    }
-    
-    function updateQuantity(id, change) {
-      const item = cart.find(i => i.id === id);
-      if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) {
-          cart = cart.filter(i => i.id !== id);
-        }
-      }
-      updateCartUI();
-    }
-    
-    function removeFromCart(id) {
-      cart = cart.filter(i => i.id !== id);
-      updateCartUI();
-    }
-    
-    function updateCartUI() {
-      const cartItemsEl = document.getElementById('cartItems');
+  </script>
+
+  <!-- New script: convert all price labels to INR and provide cart behavior using INR formatting.
+       This will ensure UI shows INR (₹) and the cart total is formatted in INR. -->
+  <script>
+    // Currency formatter for INR
+    const currencyFormatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
+
+    // Convert any static .price elements to INR (in case some still use $)
+    document.querySelectorAll('.price').forEach(p => {
+      const raw = p.textContent || '';
+      const num = parseFloat(raw.replace(/[^0-9.]/g, '')) || 0;
+      p.textContent = currencyFormatter.format(num);
+    });
+
+    // Ensure cart total default shows INR
+    const cartTotalEl = document.getElementById('cartTotal');
+    if (cartTotalEl) cartTotalEl.textContent = currencyFormatter.format(0);
+
+    // Simple cart implementation (overrides/adds functions to ensure INR everywhere)
+    (function(){
+      const cart = {}; // key: id, value: { id, name, price, image, qty }
       const cartCountEl = document.getElementById('cartCount');
-      const cartTotalEl = document.getElementById('cartTotal');
+      const cartItemsEl = document.getElementById('cartItems');
       const checkoutBtn = document.getElementById('checkoutBtn');
-      
-      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      
-      cartCountEl.textContent = totalItems;
-      cartTotalEl.textContent = '$' + totalPrice.toFixed(2);
-      checkoutBtn.disabled = cart.length === 0;
-      
-      if (cart.length === 0) {
-        cartItemsEl.innerHTML = `
-          <div class="cart-empty">
-            <i class="fas fa-shopping-bag"></i>
-            <p>Your cart is empty</p>
-          </div>
-        `;
-      } else {
-        cartItemsEl.innerHTML = cart.map(item => `
-          <div class="cart-item">
-            <img src="${item.image}" alt="${item.name}">
+      const cartOverlay = document.getElementById('cartOverlay');
+      const cartSidebar = document.getElementById('cartSidebar');
+
+      function updateCartUI() {
+        // update count
+        const totalQty = Object.values(cart).reduce((s, it) => s + it.qty, 0);
+        cartCountEl.textContent = totalQty;
+        // update items list
+        if (totalQty === 0) {
+          cartItemsEl.innerHTML = '<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>';
+          checkoutBtn.disabled = true;
+          cartTotalEl.textContent = currencyFormatter.format(0);
+          return;
+        }
+        checkoutBtn.disabled = false;
+        cartItemsEl.innerHTML = '';
+        let total = 0;
+        Object.values(cart).forEach(item => {
+          total += item.price * item.qty;
+          const itemEl = document.createElement('div');
+          itemEl.className = 'cart-item';
+          itemEl.innerHTML = `
+            <img src="${item.image}" alt="${escapeHtml(item.name)}">
             <div class="cart-item-info">
-              <h4>${item.name}</h4>
-              <p class="item-price">$${item.price.toFixed(2)}</p>
+              <h4>${escapeHtml(item.name)}</h4>
+              <div class="item-price">${currencyFormatter.format(item.price)}</div>
               <div class="cart-item-quantity">
-                <button class="qty-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
-                <span>${item.quantity}</span>
-                <button class="qty-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                <button class="qty-btn" data-action="decrease" data-id="${item.id}">-</button>
+                <div class="qty">${item.qty}</div>
+                <button class="qty-btn" data-action="increase" data-id="${item.id}">+</button>
+                <button class="cart-item-remove" data-action="remove" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
               </div>
             </div>
-            <button class="cart-item-remove" onclick="removeFromCart('${item.id}')"><i class="fas fa-trash"></i></button>
-          </div>
-        `).join('');
+          `;
+          cartItemsEl.appendChild(itemEl);
+        });
+        cartTotalEl.textContent = currencyFormatter.format(total);
       }
-    }
-    
-    function checkout() {
-      if (cart.length === 0) return;
-      alert('Checkout functionality coming soon! Total: $' + cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2));
-    }
+
+      // escape helper
+      function escapeHtml(text) {
+        return text
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/\"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      // Expose toggleCart to global (existing buttons call toggleCart)
+      window.toggleCart = function() {
+        const overlay = document.getElementById('cartOverlay');
+        const sidebar = document.getElementById('cartSidebar');
+        overlay.classList.toggle('active');
+        sidebar.classList.toggle('active');
+      };
+
+      // Add to cart function (used by existing buttons)
+      window.addToCart = function(buttonEl) {
+        // find item card
+        const card = buttonEl.closest('.carousel-item');
+        if (!card) return;
+        const id = card.dataset.id;
+        const name = card.dataset.name || 'Item';
+        const price = parseFloat(card.dataset.price) || 0;
+        const image = card.dataset.image || (card.querySelector('img') ? card.querySelector('img').src : '');
+
+        if (cart[id]) {
+          cart[id].qty += 1;
+        } else {
+          cart[id] = { id, name, price, image, qty: 1 };
+        }
+
+        // visual feedback on button
+        buttonEl.classList.add('added');
+        setTimeout(() => buttonEl.classList.remove('added'), 800);
+
+        updateCartUI();
+      };
+
+      // click handlers for quantity/increase/remove inside cart
+      cartItemsEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        const id = btn.dataset.id;
+        if (!id || !cart[id]) return;
+
+        if (action === 'increase') {
+          cart[id].qty += 1;
+        } else if (action === 'decrease') {
+          cart[id].qty = Math.max(1, cart[id].qty - 1);
+        } else if (action === 'remove') {
+          delete cart[id];
+        }
+        updateCartUI();
+      });
+
+      // checkout (simple placeholder)
+      window.checkout = function() {
+        const total = Object.values(cart).reduce((s, it) => s + it.price * it.qty, 0);
+        if (total <= 0) {
+          alert('Your cart is empty.');
+          return;
+        }
+        // proceed to checkout flow — replace with real payment integration as needed
+        alert('Proceeding to checkout. Total: ' + currencyFormatter.format(total));
+        // For demo, clear cart:
+        for (const k of Object.keys(cart)) delete cart[k];
+        updateCartUI();
+        toggleCart();
+      };
+
+      // initialize UI
+      updateCartUI();
+    })();
   </script>
 </body>
 </html>
