@@ -24,11 +24,12 @@
 
   <div class="category-menu container" id="categoryMenu">
     <ul>
-      <li><button class="category-btn active" data-category="all">All</button></li>
-      <li><button class="category-btn" data-category="keychains">Keychains</button></li>
-      <li><button class="category-btn" data-category="bags">Bags</button></li>
-      <li><button class="category-btn" data-category="shirts">Shirts</button></li>
-      <li><button class="category-btn" data-category="home-decor">Home Decor</button></li>
+      <li><button class="category-btn active" data-category="all"><i class="fas fa-th-large"></i> All</button></li>
+      <li><button class="category-btn" data-category="keychains"><i class="fas fa-key"></i> Keychains</button></li>
+      <li><button class="category-btn" data-category="bags"><i class="fas fa-bag-shopping"></i> Bags</button></li>
+      <li><button class="category-btn" data-category="shirts"><i class="fas fa-shirt"></i> Shirts</button></li>
+      <li><button class="category-btn" data-category="home-decor"><i class="fas fa-home"></i> Home Decor</button></li>
+      <li><button class="category-btn" data-category="valentines"><i class="fas fa-heart"></i> Valentines</button></li>
     </ul>
   </div>
 
@@ -39,6 +40,7 @@
       <li><a href="#shop" data-category="bags">Bags</a></li>
       <li><a href="#shop" data-category="shirts">Shirts</a></li>
       <li><a href="#shop" data-category="home-decor">Home Decor</a></li>
+      <li><a href="#shop" data-category="valentines">Valentines</a></li>
     </ul>
   </div>
   <div id="menuOverlay" class="menu-overlay" aria-hidden="true"></div>
@@ -85,6 +87,7 @@
         <h3>Handcrafted, heartfelt, and made just for you</h3>
       </div>
       <div class="category-carousels">
+        
         <!-- Keychains -->
         <div class="category-carousel" id="shop-keychains">
           <div class="carousel-container">
@@ -208,6 +211,35 @@
             <div class="carousel-dots" id="carouselDots-home-decor"></div>
           </div>
         </div>
+        <!-- Valentines (Masonry) -->
+        <div class="category-masonry" id="shop-valentines">
+          <div class="masonry-header">
+            <h3>Valentines Picks — Trending</h3>
+            <p class="small-muted">Handpicked gifts full of heart</p>
+          </div>
+          <div class="masonry-grid">
+            <div class="masonry-item carousel-item scroll-animate" data-id="v1" data-name="Heart Pillow" data-price="28" data-image="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80">
+              <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" alt="Heart Pillow" loading="lazy">
+              <div class="masonry-item-content"><span class="badge">Trending</span><h4>Heart Pillow</h4><p class="price">₹28</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-heart"></i> Gift</button></div>
+            </div>
+            <div class="masonry-item carousel-item scroll-animate" data-id="v2" data-name="Love Keychain" data-price="10" data-image="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80">
+              <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Love Keychain" loading="lazy">
+              <div class="masonry-item-content"><span class="badge">Trending</span><h4>Love Keychain</h4><p class="price">₹10</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-heart"></i> Gift</button></div>
+            </div>
+            <div class="masonry-item carousel-item scroll-animate" data-id="v3" data-name="Cupid Amigurumi" data-price="35" data-image="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80">
+              <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Cupid Amigurumi" loading="lazy">
+              <div class="masonry-item-content"><span class="badge">Trending</span><h4>Cupid Amigurumi</h4><p class="price">₹35</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-heart"></i> Gift</button></div>
+            </div>
+            <div class="masonry-item carousel-item scroll-animate" data-id="v4" data-name="Rose Cozies" data-price="18" data-image="https://images.unsplash.com/photo-1505576391880-8a4b2f0b8b6b?auto=format&fit=crop&w=800&q=80">
+              <img src="https://images.unsplash.com/photo-1505576391880-8a4b2f0b8b6b?auto=format&fit=crop&w=800&q=80" alt="Rose Cozies" loading="lazy">
+              <div class="masonry-item-content"><span class="badge">Trending</span><h4>Rose Cozies</h4><p class="price">₹18</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-heart"></i> Gift</button></div>
+            </div>
+            <div class="masonry-item carousel-item scroll-animate" data-id="v5" data-name="Love Mug Sleeve" data-price="12" data-image="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=800&q=80">
+              <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=800&q=80" alt="Love Mug Sleeve" loading="lazy">
+              <div class="masonry-item-content"><span class="badge">Trending</span><h4>Love Mug Sleeve</h4><p class="price">₹12</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-heart"></i> Gift</button></div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="carousel-container">
         <button class="carousel-btn prev" onclick="moveCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -301,40 +333,18 @@
         </div>
         <div class="about-content scroll-animate">
           <h2>Our Story</h2>
-            <p>MadeWithLoveCrochet began as a small kitchen-table studio where yarn, patience, and curiosity met. Today, our pieces are still handcrafted with the same attention to detail: each loop, join, and weave is done by hand to create items built to last.</p>
-
-            <p>Every product you see here is the result of careful material selection and thoughtful design. We work with soft cottons, recycled blends, and select merino yarns to create items that feel good against the skin and stand up to everyday use.</p>
-
-            <p>Our process is simple and intentional: we develop patterns, test swatches for drape and durability, then hand-crochet each piece. After stitching, items are finished by hand—blocked, trimmed, and inspected before they are packed in eco-friendly materials.</p>
-
-            <p>We love custom requests. If you want a specific colorway, size, or a personalized add-on, reach out via the contact form and we’ll work with you to create something unique.</p>
-
-            <p><strong>Care Tips:</strong> To keep your crochet pieces soft and bright, wash gently (hand-wash or delicate cycle in a mesh bag), reshape while damp, and dry flat away from direct heat.</p>
-
-            <p class="muted">(This section contains placeholder text describing the studio, materials, making process, customization options, and care instructions. Replace with final copy when ready.)</p>
+            <p>MadeWithLoveCrochet is a one-woman studio founded and lovingly run by Asha — a solo maker who designs and hand-crochets each piece herself. From selecting sustainable yarns to the final hand-sewn finishing, every item reflects her personal attention to detail and love for slow craft.</p>
 
             <a href="#contact" class="btn-primary">Request a Custom Order</a>
 
             <div class="team">
-              <h3>Meet the Team</h3>
+              <h3>Meet the Maker</h3>
               <div class="team-grid">
                 <div class="team-member">
                   <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Founder">
                   <h4>Asha Patel</h4>
-                  <p class="role">Founder & Lead Maker</p>
-                  <p class="bio">Asha blends traditional crochet with contemporary patterns. She oversees design and quality.</p>
-                </div>
-                <div class="team-member">
-                  <img src="https://images.unsplash.com/photo-1545996124-5f3a7c6a8c24?auto=format&fit=crop&w=400&q=80" alt="Designer">
-                  <h4>Ria Kapoor</h4>
-                  <p class="role">Designer</p>
-                  <p class="bio">Ria creates colorways and limited-edition patterns inspired by nature and textures.</p>
-                </div>
-                <div class="team-member">
-                  <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=400&q=80" alt="Operations">
-                  <h4>Sunil Rao</h4>
-                  <p class="role">Operations & Shipping</p>
-                  <p class="bio">Sunil ensures timely packing and sustainable packaging choices for every order.</p>
+                  <p class="role">Founder & Maker</p>
+                  <p class="bio">Asha designs, crochets, and finishes every product herself in her small studio.</p>
                 </div>
               </div>
             </div>
