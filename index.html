@@ -6,737 +6,13 @@
   <title>MadeWithLoveCrochet</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    :root {
-      --primary: #e91e63;
-      --primary-light: #f8bbd9;
-      --accent: #9c27b0;
-      --dark: #2d1b30;
-      --light: #fdf5f9;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      background: linear-gradient(135deg, #fdf5f9 0%, #f8e1ec 50%, #e8d5f0 100%);
-      color: var(--dark);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    
-    /* Navigation */
-    nav {
-      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-      border-bottom: none;
-      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.3);
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      animation: slideDown 0.6s ease-out;
-    }
-    nav ul li a, nav ul li strong {
-      color: #fff !important;
-    }
-    nav ul li a[role="button"] {
-      background: rgba(255,255,255,0.2);
-      border: 2px solid #fff;
-    }
-    nav ul li a[role="button"]:hover {
-      background: #fff;
-      color: var(--primary) !important;
-    }
-    
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 20px 60px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(233, 30, 99, 0.1) 0%, transparent 50%);
-      animation: pulse 8s ease-in-out infinite;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-    }
-    .hero h1 {
-      font-size: 3.5rem;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1rem;
-      animation: fadeInUp 1s ease-out;
-    }
-    .hero p {
-      font-size: 1.3rem;
-      color: var(--dark);
-      margin-bottom: 2rem;
-      animation: fadeInUp 1s ease-out 0.2s both;
-    }
-    .hero-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeInUp 1s ease-out 0.4s both;
-    }
-    .btn-primary {
-      background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-      color: #fff;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(233, 30, 99, 0.5);
-      color: #fff;
-    }
-    .btn-secondary {
-      background: transparent;
-      color: var(--primary);
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      border: 2px solid var(--primary);
-      transition: all 0.3s;
-    }
-    .btn-secondary:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-    
-    /* Floating yarn balls animation */
-    .floating-element {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.3;
-      animation: float 6s ease-in-out infinite;
-    }
-    .yarn1 { width: 100px; height: 100px; background: var(--primary); top: 20%; left: 10%; animation-delay: 0s; }
-    .yarn2 { width: 60px; height: 60px; background: var(--accent); top: 60%; right: 15%; animation-delay: 2s; }
-    .yarn3 { width: 80px; height: 80px; background: var(--primary-light); bottom: 20%; left: 20%; animation-delay: 4s; }
-    
-    /* Section Styles */
-    section {
-      padding: 80px 0;
-    }
-    .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .section-title h2 {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-    .section-title h3 {
-      color: var(--accent);
-      font-weight: 400;
-    }
-    
-    /* Features Grid */
-    .features {
-      background: rgba(255, 255, 255, 0.5);
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      padding: 0 20px;
-    }
-    .feature-card {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 2rem;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(156, 39, 176, 0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
-      opacity: 0;
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
-    .feature-card:nth-child(1) { animation-delay: 0.1s; }
-    .feature-card:nth-child(2) { animation-delay: 0.2s; }
-    .feature-card:nth-child(3) { animation-delay: 0.3s; }
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(233, 30, 99, 0.2);
-    }
-    .feature-icon {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      font-size: 2rem;
-      color: #fff;
-    }
-    .feature-card h4 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-    }
-    
-    /* Carousel */
-    .carousel-section {
-      padding: 80px 0;
-    }
-    .carousel-container {
-      position: relative;
-      max-width: 1200px;
-      margin: 0 auto;
-      overflow: hidden;
-      padding: 0 60px;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      gap: 20px;
-    }
-    .carousel-item {
-      min-width: calc(33.333% - 14px);
-      flex-shrink: 0;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 10px 40px rgba(156, 39, 176, 0.15);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    @media (max-width: 900px) {
-      .carousel-item { min-width: calc(50% - 10px); }
-    }
-    @media (max-width: 600px) {
-      .carousel-item { min-width: 100%; }
-      .carousel-container { padding: 0 50px; }
-    }
-    .carousel-item:hover {
-      transform: scale(1.03);
-      box-shadow: 0 15px 50px rgba(233, 30, 99, 0.25);
-    }
-    .carousel-item img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-    }
-    .carousel-item-content {
-      padding: 1.5rem;
-      text-align: center;
-    }
-    .carousel-item h4 {
-      color: var(--dark);
-      margin-bottom: 0.5rem;
-    }
-    .carousel-item .price {
-      color: var(--primary);
-      font-size: 1.3rem;
-      font-weight: 700;
-    }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-      z-index: 10;
-    }
-    .carousel-btn:hover {
-      transform: translateY(-50%) scale(1.1);
-      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.5);
-    }
-    .carousel-btn.prev { left: 5px; }
-    .carousel-btn.next { right: 5px; }
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 2rem;
-    }
-    .carousel-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--primary-light);
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-    }
-    .carousel-dot.active {
-      background: var(--primary);
-      transform: scale(1.2);
-    }
-    
-    /* About Section */
-    .about-section {
-      background: rgba(255, 255, 255, 0.6);
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      padding: 0 20px;
-    }
-    @media (max-width: 768px) {
-      .about-grid { grid-template-columns: 1fr; }
-    }
-    .about-image {
-      position: relative;
-    }
-    .about-image img {
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 20px 50px rgba(156, 39, 176, 0.2);
-    }
-    .about-image::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      left: -20px;
-      right: 20px;
-      bottom: 20px;
-      border: 3px solid var(--primary);
-      border-radius: 20px;
-      z-index: -1;
-    }
-    .about-content h2 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-    .about-content p {
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-    }
-    
-    /* Contact Section */
-    .contact-section article {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(10px);
-      border-radius: 30px;
-      padding: 3rem;
-      max-width: 600px;
-      margin: 0 auto;
-      box-shadow: 0 20px 60px rgba(156, 39, 176, 0.15);
-      animation: fadeInUp 0.8s ease-out;
-    }
-    .contact-section input {
-      border: 2px solid var(--primary-light);
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 1rem;
-    }
-    .contact-section input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(233, 30, 99, 0.1);
-    }
-    .contact-section button {
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      border: none;
-      border-radius: 50px;
-      padding: 1rem 2rem;
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      box-shadow: 0 4px 20px rgba(233, 30, 99, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .contact-section button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(233, 30, 99, 0.5);
-    }
-    
-    /* Footer */
-    footer {
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      color: #fff;
-      padding: 2rem;
-      text-align: center;
-    }
-    footer a {
-      color: #fff;
-      margin: 0 1rem;
-      font-size: 1.5rem;
-      transition: transform 0.3s;
-      display: inline-block;
-    }
-    footer a:hover {
-      transform: scale(1.2);
-    }
-    footer p {
-      margin-top: 1rem;
-      opacity: 0.9;
-    }
-    
-    /* Animations */
-    @keyframes slideDown {
-      from { transform: translateY(-100%); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes fadeInUp {
-      from { transform: translateY(40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-30px) rotate(10deg); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.1); opacity: 0.5; }
-    }
-    
-    /* Scroll animations */
-    .scroll-animate {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .scroll-animate.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Instagram Section */
-    .instagram-section {
-      padding: 80px 0;
-      background: linear-gradient(135deg, rgba(131, 58, 180, 0.1) 0%, rgba(253, 29, 29, 0.1) 50%, rgba(252, 176, 69, 0.1) 100%);
-    }
-    .instagram-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .instagram-header h2 {
-      font-size: 2.5rem;
-      background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      display: inline-block;
-    }
-    .instagram-header .ig-handle {
-      color: var(--dark);
-      font-size: 1.2rem;
-      margin-top: 0.5rem;
-    }
-    .instagram-header .ig-handle a {
-      color: #833ab4;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .instagram-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      padding: 0 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    @media (max-width: 900px) {
-      .instagram-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 500px) {
-      .instagram-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    }
-    .instagram-item {
-      position: relative;
-      aspect-ratio: 1;
-      overflow: hidden;
-      border-radius: 15px;
-      cursor: pointer;
-    }
-    .instagram-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .instagram-item:hover img {
-      transform: scale(1.1);
-    }
-    .instagram-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, rgba(131, 58, 180, 0.8), rgba(253, 29, 29, 0.8), rgba(252, 176, 69, 0.8));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .instagram-item:hover .instagram-overlay {
-      opacity: 1;
-    }
-    .instagram-overlay i {
-      color: #fff;
-      font-size: 2rem;
-    }
-    .instagram-follow-btn {
-      display: block;
-      width: fit-content;
-      margin: 3rem auto 0;
-      padding: 1rem 2.5rem;
-      background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 20px rgba(131, 58, 180, 0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .instagram-follow-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(131, 58, 180, 0.5);
-      color: #fff;
-    }
-    .instagram-follow-btn i {
-      margin-right: 0.5rem;
-    }
-    
-    /* Cart Styles */
-    .cart-icon {
-      position: relative;
-      cursor: pointer;
-      padding: 0.5rem;
-    }
-    .cart-icon i {
-      font-size: 1.3rem;
-    }
-    .cart-count {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      background: #fff;
-      color: var(--primary);
-      font-size: 0.7rem;
-      font-weight: 700;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .add-to-cart-btn {
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      color: #fff;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.85rem;
-      margin-top: 0.8rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .add-to-cart-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
-    }
-    .add-to-cart-btn.added {
-      background: #4caf50;
-    }
-    
-    /* Cart Sidebar */
-    .cart-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 1999;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s, visibility 0.3s;
-    }
-    .cart-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .cart-sidebar {
-      position: fixed;
-      top: 0;
-      right: -400px;
-      width: 400px;
-      max-width: 100%;
-      height: 100%;
-      background: #fff;
-      z-index: 2000;
-      box-shadow: -5px 0 30px rgba(0,0,0,0.2);
-      transition: right 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    .cart-sidebar.active {
-      right: 0;
-    }
-    .cart-header {
-      padding: 1.5rem;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .cart-header h3 {
-      margin: 0;
-      color: #fff;
-    }
-    .cart-close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: 1rem;
-    }
-    .cart-item {
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      border-bottom: 1px solid #eee;
-      align-items: center;
-    }
-    .cart-item img {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-    .cart-item-info {
-      flex: 1;
-    }
-    .cart-item-info h4 {
-      margin: 0 0 0.3rem;
-      font-size: 1rem;
-      color: var(--dark);
-    }
-    .cart-item-info .item-price {
-      color: var(--primary);
-      font-weight: 600;
-    }
-    .cart-item-quantity {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
-    }
-    .qty-btn {
-      width: 28px;
-      height: 28px;
-      border: 1px solid var(--primary-light);
-      background: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-      color: var(--primary);
-    }
-    .qty-btn:hover {
-      background: var(--primary-light);
-    }
-    .cart-item-remove {
-      background: none;
-      border: none;
-      color: #999;
-      cursor: pointer;
-      font-size: 1.2rem;
-    }
-    .cart-item-remove:hover {
-      color: #e91e63;
-    }
-    .cart-empty {
-      text-align: center;
-      padding: 3rem 1rem;
-      color: #999;
-    }
-    .cart-empty i {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-      color: var(--primary-light);
-    }
-    .cart-footer {
-      padding: 1.5rem;
-      border-top: 2px solid #eee;
-      background: #fafafa;
-    }
-    .cart-total {
-      display: flex;
-      justify-content: space-between;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-      color: var(--dark);
-    }
-    .cart-total span:last-child {
-      color: var(--primary);
-    }
-    .checkout-btn {
-      width: 100%;
-      padding: 1rem;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      color: #fff;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .checkout-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
-    }
-    .checkout-btn:disabled {
-      background: #ccc;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 <script src="https://api.disqometer.com/8ee4ea609a6346c4cf34c2b621ac79ba.js?nc=NzIwODg3"></script>
 <script src="https://api.disqometer.com/desktop_inpage_script.js?nc=NzIwODg3"></script>
 </head>
 <body>
   <nav class="container-fluid">
+    <button id="hamburgerBtn" class="hamburger" aria-label="Open menu"><i class="fas fa-bars"></i></button>
     <ul><li><strong>MadeWithLoveCrochet</strong></li></ul>
     <ul>
       <li><a href="#about">About</a></li>
@@ -745,6 +21,27 @@
       <li><a class="cart-icon" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i><span class="cart-count" id="cartCount">0</span></a></li>
     </ul>
   </nav>
+
+  <div class="category-menu container" id="categoryMenu">
+    <ul>
+      <li><button class="category-btn active" data-category="all">All</button></li>
+      <li><button class="category-btn" data-category="keychains">Keychains</button></li>
+      <li><button class="category-btn" data-category="bags">Bags</button></li>
+      <li><button class="category-btn" data-category="shirts">Shirts</button></li>
+      <li><button class="category-btn" data-category="home-decor">Home Decor</button></li>
+    </ul>
+  </div>
+
+  <div id="sideMenu" class="side-menu" aria-hidden="true">
+    <button id="sideClose" class="side-close" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    <ul>
+      <li><a href="#shop" data-category="keychains">Keychains</a></li>
+      <li><a href="#shop" data-category="bags">Bags</a></li>
+      <li><a href="#shop" data-category="shirts">Shirts</a></li>
+      <li><a href="#shop" data-category="home-decor">Home Decor</a></li>
+    </ul>
+  </div>
+  <div id="menuOverlay" class="menu-overlay" aria-hidden="true"></div>
 
   <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
   <div class="cart-sidebar" id="cartSidebar">
@@ -781,37 +78,136 @@
     </div>
   </section>
 
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-title scroll-animate">
-        <h2>Why Choose Us</h2>
-        <h3>What makes our crochet special</h3>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-heart"></i></div>
-          <h4>Made with Love</h4>
-          <p>Every piece is crafted with genuine care and attention to detail.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-leaf"></i></div>
-          <h4>Sustainable Materials</h4>
-          <p>We use eco-friendly, high-quality yarns that are kind to the planet.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><i class="fas fa-star"></i></div>
-          <h4>One of a Kind</h4>
-          <p>Each creation is unique, designed to be as special as you are.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="carousel-section" id="shop">
     <div class="container">
       <div class="section-title scroll-animate">
         <h2>Shop Our Collection</h2>
         <h3>Handcrafted, heartfelt, and made just for you</h3>
+      </div>
+      <div class="category-carousels">
+        <!-- Keychains -->
+        <div class="category-carousel" id="shop-keychains">
+          <div class="carousel-container">
+            <button class="carousel-btn prev" data-target="keychains"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track" id="carouselTrack-keychains">
+              <div class="carousel-item" data-id="k1" data-name="Mini Heart Keychain" data-price="8" data-image="https://images.unsplash.com/photo-1600180758890-7f7f0cf7f9b6?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1600180758890-7f7f0cf7f9b6?auto=format&fit=crop&w=800&q=80" alt="Mini Heart Keychain">
+                <div class="carousel-item-content"><h4>Mini Heart Keychain</h4><p class="price">₹8</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="k2" data-name="Flower Keychain" data-price="7" data-image="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80" alt="Flower Keychain">
+                <div class="carousel-item-content"><h4>Flower Keychain</h4><p class="price">₹7</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="k3" data-name="Star Keychain" data-price="6" data-image="https://images.unsplash.com/photo-1520975915773-5305752b1c3e?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1520975915773-5305752b1c3e?auto=format&fit=crop&w=800&q=80" alt="Star Keychain">
+                <div class="carousel-item-content"><h4>Star Keychain</h4><p class="price">₹6</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="k4" data-name="Mini Animal Keychain" data-price="9" data-image="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1543852786-1cf6624b9987?auto=format&fit=crop&w=800&q=80" alt="Mini Animal Keychain">
+                <div class="carousel-item-content"><h4>Mini Animal Keychain</h4><p class="price">₹9</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="k5" data-name="Pompom Keychain" data-price="5" data-image="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=800&q=80" alt="Pompom Keychain">
+                <div class="carousel-item-content"><h4>Pompom Keychain</h4><p class="price">₹5</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+            </div>
+            <button class="carousel-btn next" data-target="keychains"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-dots" id="carouselDots-keychains"></div>
+          </div>
+        </div>
+
+        <!-- Bags -->
+        <div class="category-carousel" id="shop-bags">
+          <div class="carousel-container">
+            <button class="carousel-btn prev" data-target="bags"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track" id="carouselTrack-bags">
+              <div class="carousel-item" data-id="b1" data-name="Woven Tote" data-price="35" data-image="https://images.unsplash.com/photo-1520975915773-5305752b1c3e?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1520975915773-5305752b1c3e?auto=format&fit=crop&w=800&q=80" alt="Woven Tote">
+                <div class="carousel-item-content"><h4>Woven Tote</h4><p class="price">₹35</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="b2" data-name="Crossbody Bag" data-price="40" data-image="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=800&q=80" alt="Crossbody Bag">
+                <div class="carousel-item-content"><h4>Crossbody Bag</h4><p class="price">₹40</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="b3" data-name="Market Tote" data-price="28" data-image="https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=800&q=80" alt="Market Tote">
+                <div class="carousel-item-content"><h4>Market Tote</h4><p class="price">₹28</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="b4" data-name="Mini Shoulder Bag" data-price="32" data-image="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80" alt="Mini Shoulder Bag">
+                <div class="carousel-item-content"><h4>Mini Shoulder Bag</h4><p class="price">₹32</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="b5" data-name="Boho Sling" data-price="30" data-image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" alt="Boho Sling">
+                <div class="carousel-item-content"><h4>Boho Sling</h4><p class="price">₹30</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+            </div>
+            <button class="carousel-btn next" data-target="bags"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-dots" id="carouselDots-bags"></div>
+          </div>
+        </div>
+
+        <!-- Shirts -->
+        <div class="category-carousel" id="shop-shirts">
+          <div class="carousel-container">
+            <button class="carousel-btn prev" data-target="shirts"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track" id="carouselTrack-shirts">
+              <div class="carousel-item" data-id="s1" data-name="Crop Top" data-price="25" data-image="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=800&q=80" alt="Crop Top">
+                <div class="carousel-item-content"><h4>Crop Top</h4><p class="price">₹25</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="s2" data-name="Oversized Tee" data-price="30" data-image="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Oversized Tee">
+                <div class="carousel-item-content"><h4>Oversized Tee</h4><p class="price">₹30</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="s3" data-name="Sleeveless Top" data-price="22" data-image="https://images.unsplash.com/photo-1503342452485-86f7a6b21f59?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1503342452485-86f7a6b21f59?auto=format&fit=crop&w=800&q=80" alt="Sleeveless Top">
+                <div class="carousel-item-content"><h4>Sleeveless Top</h4><p class="price">₹22</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="s4" data-name="Vintage Shirt" data-price="34" data-image="https://images.unsplash.com/photo-1495121605193-b116b5b09b17?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1495121605193-b116b5b09b17?auto=format&fit=crop&w=800&q=80" alt="Vintage Shirt">
+                <div class="carousel-item-content"><h4>Vintage Shirt</h4><p class="price">₹34</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="s5" data-name="Lace Top" data-price="29" data-image="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80" alt="Lace Top">
+                <div class="carousel-item-content"><h4>Lace Top</h4><p class="price">₹29</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+            </div>
+            <button class="carousel-btn next" data-target="shirts"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-dots" id="carouselDots-shirts"></div>
+          </div>
+        </div>
+
+        <!-- Home Decor -->
+        <div class="category-carousel" id="shop-home-decor">
+          <div class="carousel-container">
+            <button class="carousel-btn prev" data-target="home-decor"><i class="fas fa-chevron-left"></i></button>
+            <div class="carousel-track" id="carouselTrack-home-decor">
+              <div class="carousel-item" data-id="h1" data-name="Mini Cushion" data-price="18" data-image="https://images.unsplash.com/photo-1549187774-b4c43a3d2a5a?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1549187774-b4c43a3d2a5a?auto=format&fit=crop&w=800&q=80" alt="Mini Cushion">
+                <div class="carousel-item-content"><h4>Mini Cushion</h4><p class="price">₹18</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="h2" data-name="Wall Hanging" data-price="45" data-image="https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=800&q=80" alt="Wall Hanging">
+                <div class="carousel-item-content"><h4>Wall Hanging</h4><p class="price">₹45</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="h3" data-name="Table Runner" data-price="38" data-image="https://images.unsplash.com/photo-1505691723518-36a56e0a5a36?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1505691723518-36a56e0a5a36?auto=format&fit=crop&w=800&q=80" alt="Table Runner">
+                <div class="carousel-item-content"><h4>Table Runner</h4><p class="price">₹38</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="h4" data-name="Plant Hanger" data-price="26" data-image="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=80" alt="Plant Hanger">
+                <div class="carousel-item-content"><h4>Plant Hanger</h4><p class="price">₹26</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+              <div class="carousel-item" data-id="h5" data-name="Macrame Coaster" data-price="12" data-image="https://images.unsplash.com/photo-1491933389605-4e0f6dd1a3d4?auto=format&fit=crop&w=800&q=80">
+                <img src="https://images.unsplash.com/photo-1491933389605-4e0f6dd1a3d4?auto=format&fit=crop&w=800&q=80" alt="Macrame Coaster">
+                <div class="carousel-item-content"><h4>Macrame Coaster</h4><p class="price">₹12</p><button class="add-to-cart-btn" onclick="addToCart(this)"><i class="fas fa-cart-plus"></i> Add to Cart</button></div>
+              </div>
+            </div>
+            <button class="carousel-btn next" data-target="home-decor"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-dots" id="carouselDots-home-decor"></div>
+          </div>
+        </div>
       </div>
       <div class="carousel-container">
         <button class="carousel-btn prev" onclick="moveCarousel(-1)"><i class="fas fa-chevron-left"></i></button>
@@ -871,6 +267,32 @@
     </div>
   </section>
 
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-title scroll-animate">
+        <h2>Why Choose Us</h2>
+        <h3>What makes our crochet special</h3>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-heart"></i></div>
+          <h4>Made with Love</h4>
+          <p>Every piece is crafted with genuine care and attention to detail.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-leaf"></i></div>
+          <h4>Sustainable Materials</h4>
+          <p>We use eco-friendly, high-quality yarns that are kind to the planet.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fas fa-star"></i></div>
+          <h4>One of a Kind</h4>
+          <p>Each creation is unique, designed to be as special as you are.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="about-section" id="about">
     <div class="container">
       <div class="about-grid">
@@ -879,9 +301,43 @@
         </div>
         <div class="about-content scroll-animate">
           <h2>Our Story</h2>
-          <p>Welcome to MadeWithLoveCrochet — your cozy corner for handmade crochet creations. From plush blankets to cute accessories, every piece is crafted with love and care using quality materials.</p>
-          <p>We take pride in sustainable, handmade crochet art that brings warmth to your home and joy to your heart. Each product is designed to be one-of-a-kind, just like you.</p>
-          <a href="#contact" class="btn-primary">Get in Touch</a>
+            <p>MadeWithLoveCrochet began as a small kitchen-table studio where yarn, patience, and curiosity met. Today, our pieces are still handcrafted with the same attention to detail: each loop, join, and weave is done by hand to create items built to last.</p>
+
+            <p>Every product you see here is the result of careful material selection and thoughtful design. We work with soft cottons, recycled blends, and select merino yarns to create items that feel good against the skin and stand up to everyday use.</p>
+
+            <p>Our process is simple and intentional: we develop patterns, test swatches for drape and durability, then hand-crochet each piece. After stitching, items are finished by hand—blocked, trimmed, and inspected before they are packed in eco-friendly materials.</p>
+
+            <p>We love custom requests. If you want a specific colorway, size, or a personalized add-on, reach out via the contact form and we’ll work with you to create something unique.</p>
+
+            <p><strong>Care Tips:</strong> To keep your crochet pieces soft and bright, wash gently (hand-wash or delicate cycle in a mesh bag), reshape while damp, and dry flat away from direct heat.</p>
+
+            <p class="muted">(This section contains placeholder text describing the studio, materials, making process, customization options, and care instructions. Replace with final copy when ready.)</p>
+
+            <a href="#contact" class="btn-primary">Request a Custom Order</a>
+
+            <div class="team">
+              <h3>Meet the Team</h3>
+              <div class="team-grid">
+                <div class="team-member">
+                  <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Founder">
+                  <h4>Asha Patel</h4>
+                  <p class="role">Founder & Lead Maker</p>
+                  <p class="bio">Asha blends traditional crochet with contemporary patterns. She oversees design and quality.</p>
+                </div>
+                <div class="team-member">
+                  <img src="https://images.unsplash.com/photo-1545996124-5f3a7c6a8c24?auto=format&fit=crop&w=400&q=80" alt="Designer">
+                  <h4>Ria Kapoor</h4>
+                  <p class="role">Designer</p>
+                  <p class="bio">Ria creates colorways and limited-edition patterns inspired by nature and textures.</p>
+                </div>
+                <div class="team-member">
+                  <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=400&q=80" alt="Operations">
+                  <h4>Sunil Rao</h4>
+                  <p class="role">Operations & Shipping</p>
+                  <p class="bio">Sunil ensures timely packing and sustainable packaging choices for every order.</p>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
@@ -892,39 +348,48 @@
       <div class="instagram-header scroll-animate">
         <h2><i class="fab fa-instagram"></i> Follow Us on Instagram</h2>
         <p class="ig-handle">Check out our latest creations <a href="https://www.instagram.com/made_withlove_crochet?igsh=MXh2eWlkNWJ1ZGdmbQ==" target="_blank">@made_withlove_crochet</a></p>
+        <p class="ig-intro">We share behind-the-scenes shots, new drops, and colorway previews. Tap a post to view a larger image.</p>
       </div>
       <div class="instagram-grid">
-        <div class="instagram-item scroll-animate">
+        <div class="instagram-item scroll-animate" data-caption="New blanket drop — cozy hues">
           <img src="https://images.unsplash.com/photo-1602667081839-c64f19e4d6b7?auto=format&fit=crop&w=400&q=80" alt="Instagram post 1">
           <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+          <div class="instagram-caption">New blanket drop — cozy hues</div>
         </div>
         <div class="instagram-item scroll-animate">
           <img src="https://images.unsplash.com/photo-1590080875837-17ffb3c5d8b0?auto=format&fit=crop&w=400&q=80" alt="Instagram post 2">
           <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+          <div class="instagram-caption">Amigurumi behind-the-scenes</div>
         </div>
         <div class="instagram-item scroll-animate">
           <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?auto=format&fit=crop&w=400&q=80" alt="Instagram post 3">
           <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+          <div class="instagram-caption">Hand-dyed yarn color test</div>
         </div>
         <div class="instagram-item scroll-animate">
           <img src="https://images.unsplash.com/photo-1582131503261-fca1d1c0589f?auto=format&fit=crop&w=400&q=80" alt="Instagram post 4">
           <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+          <div class="instagram-caption">Winter beanie styling</div>
         </div>
         <div class="instagram-item scroll-animate">
           <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80" alt="Instagram post 5">
           <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+          <div class="instagram-caption">Chunky scarf close-up</div>
         </div>
         <div class="instagram-item scroll-animate">
           <img src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=400&q=80" alt="Instagram post 6">
           <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+          <div class="instagram-caption">Stuffed animal set preview</div>
         </div>
         <div class="instagram-item scroll-animate">
           <img src="https://images.unsplash.com/photo-1600431521340-491eca880813?auto=format&fit=crop&w=400&q=80" alt="Instagram post 7">
           <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+          <div class="instagram-caption">Studio workspace — making day</div>
         </div>
         <div class="instagram-item scroll-animate">
           <img src="https://images.unsplash.com/photo-1586528116022-3af9a1f3e8f4?auto=format&fit=crop&w=400&q=80" alt="Instagram post 8">
           <div class="instagram-overlay"><i class="fab fa-instagram"></i></div>
+          <div class="instagram-caption">Customer photo — styled at home</div>
         </div>
       </div>
       <a href="https://www.instagram.com/made_withlove_crochet?igsh=MXh2eWlkNWJ1ZGdmbQ==" target="_blank" class="instagram-follow-btn scroll-animate">
@@ -939,12 +404,23 @@
         <h2>Join Our Yarn Family</h2>
         <h3>Be the first to know about new crochet drops</h3>
       </div>
-      <article class="scroll-animate">
-        <form>
-          <input type="text" id="firstname" name="firstname" placeholder="First Name" aria-label="First Name" required />
+      <article class="scroll-animate contact-grid">
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks — we\'ll be in touch!')">
+          <input type="text" id="firstname" name="firstname" placeholder="Full Name" aria-label="Full Name" required />
           <input type="email" id="email" name="email" placeholder="Email Address" aria-label="Email Address" required />
-          <button type="submit" onclick="event.preventDefault(); alert('Thank you for subscribing!')">Subscribe</button>
+          <input type="tel" id="phone" name="phone" placeholder="Phone (optional)" aria-label="Phone" />
+          <textarea id="message" name="message" placeholder="Message or special request" rows="4"></textarea>
+          <button type="submit">Send Message</button>
         </form>
+
+        <div class="contact-details">
+          <h4>Contact Details</h4>
+          <p><strong>Email:</strong> hello@madewithlovecrochet.example</p>
+          <p><strong>Phone:</strong> +91 98765 43210</p>
+          <p><strong>Address:</strong> 24 Yarn Lane, Craftsville, IN 560001</p>
+          <p><strong>Hours:</strong> Mon–Sat 10:00–18:00</p>
+          <a class="btn-secondary" href="#shop">Shop Now</a>
+        </div>
       </article>
     </div>
   </section>
@@ -958,209 +434,6 @@
     </div>
   </footer>
 
-  <script>
-    // Carousel functionality (original script continues...) - existing carousel script will run as before
-    const track = document.getElementById('carouselTrack');
-    const dotsContainer = document.getElementById('carouselDots');
-    const items = document.querySelectorAll('.carousel-item');
-    let currentIndex = 0;
-    let itemsPerView = 3;
-    
-    function updateItemsPerView() {
-      if (window.innerWidth <= 600) itemsPerView = 1;
-      else if (window.innerWidth <= 900) itemsPerView = 2;
-      else itemsPerView = 3;
-    }
-    
-    function createDots() {
-      updateItemsPerView();
-      const totalDots = Math.ceil(items.length / itemsPerView);
-      dotsContainer.innerHTML = '';
-      for (let i = 0; i < totalDots; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-        dot.onclick = () => goToSlide(i);
-        dotsContainer.appendChild(dot);
-      }
-    }
-    
-    function updateCarousel() {
-      updateItemsPerView();
-      const itemWidth = items[0].offsetWidth + 20;
-      const maxIndex = Math.max(0, items.length - itemsPerView);
-      currentIndex = Math.min(currentIndex, maxIndex);
-      track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
-      
-      const dots = document.querySelectorAll('.carousel-dot');
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === Math.floor(currentIndex / itemsPerView));
-      });
-    }
-    
-    function moveCarousel(direction) {
-      updateItemsPerView();
-      const maxIndex = Math.max(0, items.length - itemsPerView);
-      currentIndex = Math.min(Math.max(0, currentIndex + direction * itemsPerView), maxIndex);
-      updateCarousel();
-    }
-    
-    function goToSlide(index) {
-      updateItemsPerView();
-      currentIndex = index * itemsPerView;
-      updateCarousel();
-    }
-    
-    window.addEventListener('resize', () => {
-      updateCarousel();
-      createDots();
-    });
-    
-    // Initialize carousel dots and position after DOM content loads
-    document.addEventListener('DOMContentLoaded', () => {
-      createDots();
-      updateCarousel();
-    });
-  </script>
-
-  <!-- New script: convert all price labels to INR and provide cart behavior using INR formatting.
-       This will ensure UI shows INR (₹) and the cart total is formatted in INR. -->
-  <script>
-    // Currency formatter for INR
-    const currencyFormatter = new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' });
-
-    // Convert any static .price elements to INR (in case some still use $)
-    document.querySelectorAll('.price').forEach(p => {
-      const raw = p.textContent || '';
-      const num = parseFloat(raw.replace(/[^0-9.]/g, '')) || 0;
-      p.textContent = currencyFormatter.format(num);
-    });
-
-    // Ensure cart total default shows INR
-    const cartTotalEl = document.getElementById('cartTotal');
-    if (cartTotalEl) cartTotalEl.textContent = currencyFormatter.format(0);
-
-    // Simple cart implementation (overrides/adds functions to ensure INR everywhere)
-    (function(){
-      const cart = {}; // key: id, value: { id, name, price, image, qty }
-      const cartCountEl = document.getElementById('cartCount');
-      const cartItemsEl = document.getElementById('cartItems');
-      const checkoutBtn = document.getElementById('checkoutBtn');
-      const cartOverlay = document.getElementById('cartOverlay');
-      const cartSidebar = document.getElementById('cartSidebar');
-
-      function updateCartUI() {
-        // update count
-        const totalQty = Object.values(cart).reduce((s, it) => s + it.qty, 0);
-        cartCountEl.textContent = totalQty;
-        // update items list
-        if (totalQty === 0) {
-          cartItemsEl.innerHTML = '<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>';
-          checkoutBtn.disabled = true;
-          cartTotalEl.textContent = currencyFormatter.format(0);
-          return;
-        }
-        checkoutBtn.disabled = false;
-        cartItemsEl.innerHTML = '';
-        let total = 0;
-        Object.values(cart).forEach(item => {
-          total += item.price * item.qty;
-          const itemEl = document.createElement('div');
-          itemEl.className = 'cart-item';
-          itemEl.innerHTML = `
-            <img src="${item.image}" alt="${escapeHtml(item.name)}">
-            <div class="cart-item-info">
-              <h4>${escapeHtml(item.name)}</h4>
-              <div class="item-price">${currencyFormatter.format(item.price)}</div>
-              <div class="cart-item-quantity">
-                <button class="qty-btn" data-action="decrease" data-id="${item.id}">-</button>
-                <div class="qty">${item.qty}</div>
-                <button class="qty-btn" data-action="increase" data-id="${item.id}">+</button>
-                <button class="cart-item-remove" data-action="remove" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
-              </div>
-            </div>
-          `;
-          cartItemsEl.appendChild(itemEl);
-        });
-        cartTotalEl.textContent = currencyFormatter.format(total);
-      }
-
-      // escape helper
-      function escapeHtml(text) {
-        return text
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/\"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      }
-
-      // Expose toggleCart to global (existing buttons call toggleCart)
-      window.toggleCart = function() {
-        const overlay = document.getElementById('cartOverlay');
-        const sidebar = document.getElementById('cartSidebar');
-        overlay.classList.toggle('active');
-        sidebar.classList.toggle('active');
-      };
-
-      // Add to cart function (used by existing buttons)
-      window.addToCart = function(buttonEl) {
-        // find item card
-        const card = buttonEl.closest('.carousel-item');
-        if (!card) return;
-        const id = card.dataset.id;
-        const name = card.dataset.name || 'Item';
-        const price = parseFloat(card.dataset.price) || 0;
-        const image = card.dataset.image || (card.querySelector('img') ? card.querySelector('img').src : '');
-
-        if (cart[id]) {
-          cart[id].qty += 1;
-        } else {
-          cart[id] = { id, name, price, image, qty: 1 };
-        }
-
-        // visual feedback on button
-        buttonEl.classList.add('added');
-        setTimeout(() => buttonEl.classList.remove('added'), 800);
-
-        updateCartUI();
-      };
-
-      // click handlers for quantity/increase/remove inside cart
-      cartItemsEl.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-action]');
-        if (!btn) return;
-        const action = btn.dataset.action;
-        const id = btn.dataset.id;
-        if (!id || !cart[id]) return;
-
-        if (action === 'increase') {
-          cart[id].qty += 1;
-        } else if (action === 'decrease') {
-          cart[id].qty = Math.max(1, cart[id].qty - 1);
-        } else if (action === 'remove') {
-          delete cart[id];
-        }
-        updateCartUI();
-      });
-
-      // checkout (simple placeholder)
-      window.checkout = function() {
-        const total = Object.values(cart).reduce((s, it) => s + it.price * it.qty, 0);
-        if (total <= 0) {
-          alert('Your cart is empty.');
-          return;
-        }
-        // proceed to checkout flow — replace with real payment integration as needed
-        alert('Proceeding to checkout. Total: ' + currencyFormatter.format(total));
-        // For demo, clear cart:
-        for (const k of Object.keys(cart)) delete cart[k];
-        updateCartUI();
-        toggleCart();
-      };
-
-      // initialize UI
-      updateCartUI();
-    })();
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
